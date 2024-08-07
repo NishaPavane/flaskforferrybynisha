@@ -1,16 +1,17 @@
+from datetime import datetime
 from extensions import db
 
 class User(db.Model):
     __tablename__ = 'ports'
     id = db.Column(db.Integer, primary_key=True)
-    portname = db.Column(db.String(80), nullable=False, unique=True)
-    state = db.Column(db.String(80), nullable=False)
-    address = db.Column(db.String(80), nullable=False)
-    portcity = db.Column(db.String(80), nullable=False)
-    contact = db.Column(db.String(15), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now(), onupdate=db.func.now())
-
+    portname = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    address = db.Column(db.String(200))
+    portcity = db.Column(db.String(100))
+    contact = db.Column(db.String(100))
+    status = db.Column(db.String(50))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     @property
     def data(self):
         return {

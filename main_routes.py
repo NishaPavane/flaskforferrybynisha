@@ -20,3 +20,14 @@ def edit_user(user_id):
 @main.route('/deleteuser/<int:user_id>', methods=['GET', 'POST'])
 def delete_user(user_id):
     return delete_user_function(user_id)
+
+@main.route('/updatestatus/<int:user_id>', methods=['POST'])
+def update_status(user_id):
+    data = request.get_json()
+    status = data.get('status')
+    user = User.query.get(user_id)
+    if user:
+        user.status = status
+        db.session.commit()
+        return jsonify({'success': True})
+    return jsonify({'success': False})
